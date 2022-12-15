@@ -38,6 +38,7 @@
 }
 .todo-data{
     display: flex;
+    flex-grow: 1;
     flex-direction: column;
     gap: 0.5rem;
 }
@@ -102,9 +103,6 @@
     display: flex;
     gap: 0.5rem;
 }
-.display-none{
-    display: none;
-}
 .display-flex{
     display: flex;
 }
@@ -114,7 +112,7 @@
     color: #FCA311;
 }
 .pencil:hover{
-    transition: 0.25rem;
+    transition: 0.25s;
     outline: none;
     background-color: #FCA311;
     color: #e5e5e5;
@@ -125,27 +123,50 @@
     color: #F56F52;
 }
 .trash:hover{
-    transition: 0.25rem;
+    transition: 0.25s;
     outline: none;
     background-color: #F56F52;
     color: #e5e5e5;
 }
 .add-form{
-    padding: 1rem;
+    padding: 0.5rem;
     display: flex;
     flex-direction: column;
-    gap: 5rem;
+    gap: 2.5rem;
+    position: fixed;
+    width: 50%;
+    top: 37%;
+    left: 25%;
+    background-color: #e5e5e5;
+    z-index: 1;
+    border-radius: 0.5rem;
 }
 .inputs{
     display: flex;
     flex-direction: column;
     gap: 1rem;
 }
+.inputs > input{
+    padding: 0.5rem;
+    border: none;
+    outline: none;
+    border-radius: 0.25rem;
+}
 .btns-add{
     display: flex;
     flex-direction: column;
     gap: 1rem;
 }
+.btns-alert-delete{
+    display: flex;
+    gap: 1rem;
+}
+.btns-alert-delete > button{
+    flex-grow: 1;
+}
 .btns-add > button{
     background-color: #e5e5e5;
+}
+.display-none{
+    display: none;
 }

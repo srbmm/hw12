@@ -9,24 +9,32 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="add-form">
+    <div class="add-form display-none" id="add-form">
         <div class="inputs">
-            <input type="text">
-            <input type="text">
-            <input type="text">
+            <input type="text" placeholder="title" id="title">
+            <input type="text" placeholder="description" id="desc">
+            <input type="date" id="due-date">
         </div>
         <div class="btns-add">
-            <button class="btn pencil">Save</button>
-            <button class="btn trash">Cancle</button>
+            <button class="btn pencil" id="save-btn">Save</button>
+            <button class="btn trash" id="cancle-btn">Cancle</button>
         </div>
     </div>
-    <div class="delete-alert none"></div>
-    <div class="blue-div"></div>
-   <div class="container blur">
-    <button class="btn add">Add</button>
+    <div class="add-form display-none" id="delete-alert">
+        <div class="inputs">
+            <p>Are you sure?</p>
+        </div>
+        <div class="btns-alert-delete">
+            <button class="btn pencil" id="delete-yes">Yes</button>
+            <button class="btn trash" id="delete-no">No</button>
+        </div>
+    </div>
+    <div class="blue-div display-none" id="blue-div"></div>
+   <div class="container" id="container">
+    <button class="btn add" id="add-btn">Add</button>
     <div class="todos">
         <div class="todo-box">
-            <div class="check-box-border"><i class="bi bi-check"></i></div>
+            <button class="check-box-border"><i class="bi bi-check"></i></button>
             <div class="todo-data">
             <div class="title-btns">
             <div class="title-date">
@@ -43,17 +51,11 @@
         </div>
     </div>
     <footer class="pages">
-        <button class="btn prev">Prev</button>
-        <div class="pages-side">
-            <button class="btn">1</button>
-            <button class="btn">2</button>
-            <button class="btn">3</button>
-            <p style="font-size: 1.5em;">...</p>
-            <button class="btn">12</button>
+        <div class="pages-side" id="pages-side">
+
         </div>
-        <button class="btn next">Next</button>
     </footer>
    </div> 
-   <script src="script.js"></script>
+   <script type="module" src="script.js"></script>
 </body>
 </html>
