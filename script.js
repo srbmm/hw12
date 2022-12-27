@@ -12,10 +12,10 @@ const blueDiv = document.getElementById("blue-div"),
     yesDeleteBtn = document.getElementById("delete-yes"),
     noDeleteBtn = document.getElementById("delete-no"),
     pageSide = document.getElementById("pages-side"),
-    Server = "https://639adaf5d514150197419198.mockapi.io/todos",
     todos = document.querySelector(".todos"),
-    data = new fetchClass(Server),
-    Tedad = 5;
+    Server = "https://639adaf5d514150197419198.mockapi.io/todos",
+    NUMBERS = 5,
+    data = new fetchClass(Server);
 let choiceObj,
     method = "",
     page = 1;
@@ -48,7 +48,7 @@ function hideAddForm() {
     addForm.classList.add("display-none");
     blueDiv.classList.add("display-none");
     container.classList.remove("blur");
-
+    choiceObj = undefined;
 }
 addBtn.addEventListener("click", () => {
     showAddForm();
@@ -79,42 +79,36 @@ saveBtn.addEventListener("click", () => {
         ).then(res => filterData())
     }
     method = "";
-    choiceObj = undefined;
 });
 yesDeleteBtn.addEventListener("click", function(){
-    hideDeleteAlert();
     data.delete(choiceObj.id).then(res => filterData());
-    choiceObj = undefined;
+    hideDeleteAlert();
     method = "";
 
 })
-// for (let i = 0; i < 6; i++) {
-//   data.delete(`${i}`)
-// }
+
 cancelBtn.addEventListener("click", hideAddForm);
 noDeleteBtn.addEventListener("click", hideAddForm);
 
 function filterData() {
     pageSide.innerHTML = "";
-    data.get().then((res) => {
-        for (let i = 1; i <= parseInt(res.length/Tedad) + 1; i++){
+    data.get(`?page=${page}&limit=${NUMBERS}`).then((res) => {
+        renderData(res);
+        for (let i = 1; i <= parseInt(25/NUMBERS); i++){
             const btn = document.createElement("button");
             btn.classList.add("btn");
             btn.innerText = `${i}`;
             btn.addEventListener("click", (e) =>{
-                page = e.target.value;
+                page = e.target.textContent;
                 filterData()
             })
-            console.log(pageSide);
             pageSide.appendChild(btn);
         }
-        data.get(`?page=${page}&limit=${Tedad}`).then(res => renderData(res))
     }
     );
 }
 filterData()
 function renderData(allTodos) {
-    console.log(allTodos)
     todos.innerHTML = "";
     allTodos.forEach(function (item) {
         const titleDate = document.createElement('div');
@@ -124,17 +118,17 @@ function renderData(allTodos) {
         btnEdit.innerHTML =`<i class="bi bi-pencil-fill"></i>`;
         btnEdit.classList.add('btn', 'pencil');
         btnEdit.addEventListener('click', () =>{
-            showAddForm(item);
             method = "Put";
             choiceObj = item;
+            showAddForm(item);
         })
         const btnDelete = document.createElement('button');
         btnDelete.innerHTML =`<i class="bi bi-trash-fill"></i>`;
         btnDelete.classList.add('btn', 'trash');
         btnDelete.addEventListener('click', () => {
-            showDeleteAlert(item);
             choiceObj = item;
             method = "Delete";
+            showDeleteAlert(item);
         })
         const btns = document.createElement('div');
         btns.classList.add('btns');
